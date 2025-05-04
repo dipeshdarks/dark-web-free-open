@@ -1,0 +1,1600 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>DarkwebDaily.Live</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background: #0a0a0a;
+            color: #e0e0e0;
+            font-family: 'Courier New', monospace;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #00ff00;
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+            font-size: 2.5em;
+        }
+
+        .live {
+            color: red;
+            position: relative;
+        }
+
+        .live::before,
+        .live::after {
+            content: '';
+            position: absolute;
+            border: 2px solid red;
+            width: 15px;
+            height: 15px;
+        }
+
+        .live::before {
+            top: -5px;
+            left: -5px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .live::after {
+            bottom: -5px;
+            right: -5px;
+            border-left: none;
+            border-top: none;
+        }
+
+        .socials {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .socials a {
+            color: #00ff00;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 1.2em;
+            transition: color 0.3s;
+        }
+
+        .socials a:hover {
+            color: red;
+        }
+
+        .nav-container {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(5px);
+            padding: 10px 0;
+            z-index: 1000;
+            border-top: 1px solid #1a1a1a;
+            border-bottom: 1px solid #1a1a1a;
+            margin: 20px 0;
+            width: 100%;
+        }
+
+        .nav-menu {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            padding: 0 20px;
+        }
+
+        .nav-item {
+            color: #e0e0e0;
+            text-decoration: none;
+            padding: 5px 15px;
+            border: 1px solid #333;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+            background: #1a1a1a;
+            cursor: pointer;
+        }
+
+        .nav-item:hover {
+            color: #00ff00;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+            border-color: #00ff00;
+            background: rgba(0, 255, 0, 0.1);
+        }
+
+        .nav-item.active {
+            background: #2a2a2a;
+            border-color: #444;
+            color: #fff;
+        }
+
+        .market {
+            position: relative;
+            border: 1px solid #333;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .market:hover {
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.7);
+            transform: scale(1.02);
+        }
+
+        .market::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: var(--background-image);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.7;
+            z-index: -1;
+        }
+
+        .market h2 {
+            color: #ffffff;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+        }
+
+        .badge {
+            display: block;
+            margin: 10px auto;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            font-weight: bold;
+            text-decoration: none;
+            color: #fff;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+        }
+
+        .badge.online {
+            background: #003300;
+            color: #00ff00;
+            border: 1px solid #00ff00;
+        }
+
+        .badge.offline {
+            background: #330000;
+            color: #ff0000;
+            border: 1px solid #ff0000;
+        }
+
+        .badge:hover {
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.7);
+            background: rgba(0, 255, 0, 0.1);
+        }
+
+        section {
+            scroll-margin-top: 100px;
+            margin-top: 40px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .nav-item:target {
+            background: #2a2a2a;
+            border-color: #444;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>DarkwebDaily<span class="live">.Live</span></h1>
+
+        <div class="socials">
+            <a href="https://rumble.com/user/DoingFedTime" target="_blank">Rumble</a>
+            <a href="https://www.youtube.com/@sam_bent" target="_blank">Youtube</a>
+            <a href="https://x.com/DoingFedTime" target="_blank">X</a>
+            <a href="https://www.linkedin.com/in/sam-bent/" target="_blank">Linkedin</a>
+            <a href="https://github.com/DoingFedTime" target="_blank">Github</a>
+            <a href="https://sambent.com" target="_blank">My Site</a>
+            <a href="https://www.instagram.com/sambentoffical/" target="_blank">IG</a>
+            <a href="http://dailydwusclfsu7fzwydc5emidexnesmdlzqmz2dxnx5x4thl42vj4qd.onion/"
+                target="_blank">Darkweb.live Onion</a>
+        </div>
+
+        <p class="timestamp">Last checked: 2025-04-21 17:05 UTC</p>
+        <p>Special thanks to AndyTurbo and QuantumlyImmortal</p>
+
+        <nav class="nav-container">
+            <div class="nav-menu">
+                <a href="#markets" class="nav-item">Markets</a>
+                <a href="#forums" class="nav-item">Forums</a>
+                <a href="#security" class="nav-item">Security</a>
+                <a href="#tools" class="nav-item">Tools</a>
+                <a href="#search" class="nav-item">Search</a>
+                <a href="#communications" class="nav-item">Communications</a>
+                <a href="#news" class="nav-item">News</a>
+                <a href="#crypto" class="nav-item">Crypto</a>
+            </div>
+        </nav>
+
+        <section id="markets" class="category-section">
+            <h2>Markets</h2>
+
+            <div class="market" style="--background-image: url('images/abacus.webp');" loading="lazy">
+                <h2>Abacus</h2>
+                <div>
+
+                    <a href="http://abacuseeettcn3n2zxo7tqy5vsxhqpha2jtjqs7cgdjzl2jascr4liad.onion" target="_blank"
+                        class="badge online">
+                        abacuseeettcn3n2zxo7tqy5vsxhqpha2jtjqs7cgdjzl2jascr4liad.onion (ONLINE)
+                    </a>
+
+                    <a href="http://abacusall6l52n5gp357vpv4yjjvh6ewg65pjbfvacyqcldux66btlqd.onion" target="_blank"
+                        class="badge offline">
+                        abacusall6l52n5gp357vpv4yjjvh6ewg65pjbfvacyqcldux66btlqd.onion (OFFLINE)
+                    </a>
+
+                    <a href="http://abacuskzoo7wrfmpqiqscoiljfjap42rzjkfygp5vm3gtlu5tanhbjad.onion" target="_blank"
+                        class="badge online">
+                        abacuskzoo7wrfmpqiqscoiljfjap42rzjkfygp5vm3gtlu5tanhbjad.onion (ONLINE)
+                    </a>
+
+                    <a href="http://r6qie7isrsk656ozslief4niekojtano5igqpptwc4zb2xmqseadhrid.onion" target="_blank"
+                        class="badge offline">
+                        r6qie7isrsk656ozslief4niekojtano5igqpptwc4zb2xmqseadhrid.onion (OFFLINE)
+                    </a>
+
+                    <a href="http://mtxs2xfu3n6uz5kbochkhk3u6fdts7nijd3a5r5gcdc7ztbujn66h3id.onion" target="_blank"
+                        class="badge offline">
+                        mtxs2xfu3n6uz5kbochkhk3u6fdts7nijd3a5r5gcdc7ztbujn66h3id.onion (OFFLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/atlas.webp');" loading="lazy">
+                <h2>Atlas</h2>
+                <div>
+
+                    <a href="http://atlasgooo2pie5vyvwbt35zvfsiiy3va7tirvbe5ocvjugq7lggxlmyd.onion" target="_blank"
+                        class="badge offline">
+                        atlasgooo2pie5vyvwbt35zvfsiiy3va7tirvbe5ocvjugq7lggxlmyd.onion (OFFLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/archetyp.webp');" loading="lazy">
+                <h2>Archetyp</h2>
+                <div>
+
+                    <a href="http://4pt4axjgzmm4ibmxplfiuvopxzf775e5bqseyllafcecryfthdupjwyd.onion" target="_blank"
+                        class="badge offline">
+                        4pt4axjgzmm4ibmxplfiuvopxzf775e5bqseyllafcecryfthdupjwyd.onion (OFFLINE)
+                    </a>
+
+                    <a href="http://zjfsopfrwpvqrhiy73vxb6zq7ksyffkzfyow2gmhgvjsseogy65uguyd.onion" target="_blank"
+                        class="badge offline">
+                        zjfsopfrwpvqrhiy73vxb6zq7ksyffkzfyow2gmhgvjsseogy65uguyd.onion (OFFLINE)
+                    </a>
+
+                    <a href="http://s4wq4oz66bbyvsv2rg3ixwuwzvoxv226bg3563ptchx7xknelhfu3rqd.onion" target="_blank"
+                        class="badge offline">
+                        s4wq4oz66bbyvsv2rg3ixwuwzvoxv226bg3563ptchx7xknelhfu3rqd.onion (OFFLINE)
+                    </a>
+
+                    <a href="http://uyeygtqorgwxmp4bskauanuiofeh7frv35nvmghni5aihf32z27ogqqd.onion" target="_blank"
+                        class="badge offline">
+                        uyeygtqorgwxmp4bskauanuiofeh7frv35nvmghni5aihf32z27ogqqd.onion (OFFLINE)
+                    </a>
+
+                    <a href="http://a7mupnlw776xwbt3zcaqrvrje2x44mpmwqszc5zzdseyldpq7ftyzsqd.onion" target="_blank"
+                        class="badge offline">
+                        a7mupnlw776xwbt3zcaqrvrje2x44mpmwqszc5zzdseyldpq7ftyzsqd.onion (OFFLINE)
+                    </a>
+
+                    <a href="http://pmrhqakmmgue4vvdfqds27vyiuhz2qj65sql4zqoeobxlx6onwte64qd.onion" target="_blank"
+                        class="badge offline">
+                        pmrhqakmmgue4vvdfqds27vyiuhz2qj65sql4zqoeobxlx6onwte64qd.onion (OFFLINE)
+                    </a>
+
+                    <a href="http://fccayuqwcub4ikf6rjafaxld5dwu7relbox64gx45ivwzcbr6w4yn6ad.onion" target="_blank"
+                        class="badge offline">
+                        fccayuqwcub4ikf6rjafaxld5dwu7relbox64gx45ivwzcbr6w4yn6ad.onion (OFFLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/blackops.webp');" loading="lazy">
+                <h2>BlackOps Market</h2>
+                <div>
+
+                    <a href="http://blackops3zlgfuq4dg4yrtxoe57u3sxfa34kqzbooqbovutleqhf3zqd.onion" target="_blank"
+                        class="badge online">
+                        blackops3zlgfuq4dg4yrtxoe57u3sxfa34kqzbooqbovutleqhf3zqd.onion (ONLINE)
+                    </a>
+
+                    <a href="http://blackops4zfjqugajzrwokor34sv4sm5sf6pnegaevhgd7k7yt3rkbid.onion" target="_blank"
+                        class="badge online">
+                        blackops4zfjqugajzrwokor34sv4sm5sf6pnegaevhgd7k7yt3rkbid.onion (ONLINE)
+                    </a>
+
+                    <a href="http://blackops527cggb6ybayggx3bjt24xz32rotdugs6ikejxdiik6dyiid.onion" target="_blank"
+                        class="badge online">
+                        blackops527cggb6ybayggx3bjt24xz32rotdugs6ikejxdiik6dyiid.onion (ONLINE)
+                    </a>
+
+                    <a href="http://blackops66p7edjocooiipudvefdhupk27pi4y72iwnbbjvccky646yd.onion" target="_blank"
+                        class="badge online">
+                        blackops66p7edjocooiipudvefdhupk27pi4y72iwnbbjvccky646yd.onion (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/cannaexpress.webp');" loading="lazy">
+                <h2>CannaExpress</h2>
+                <div>
+
+                    <a href="http://cannaex7sxdz3fy3bhyoaagwr5hhb64oabqllb7fpqvl3qwafmxxdhqd.onion" target="_blank"
+                        class="badge offline">
+                        cannaex7sxdz3fy3bhyoaagwr5hhb64oabqllb7fpqvl3qwafmxxdhqd.onion (OFFLINE)
+                    </a>
+
+                    <a href="http://cannaexsunpnqjwy4i4bafbqgfsnn7lwnsf6azqgcaoog5d2i3qw2uyd.onion" target="_blank"
+                        class="badge offline">
+                        cannaexsunpnqjwy4i4bafbqgfsnn7lwnsf6azqgcaoog5d2i3qw2uyd.onion (OFFLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/catharsis.webp');" loading="lazy">
+                <h2>Catharsis</h2>
+                <div>
+
+                    <a href="http://catharibrmbuat2is36fef24gqf3rzcmkdy6llybjyxzrqthzx7o3oyd.onion" target="_blank"
+                        class="badge offline">
+                        catharibrmbuat2is36fef24gqf3rzcmkdy6llybjyxzrqthzx7o3oyd.onion (OFFLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/citymarket.webp');" loading="lazy">
+                <h2>City Market</h2>
+                <div>
+
+                    <a href="http://wsptlnuoo3johqzcdlwuj5zcwfh2dwmswz6hahqctuxttvxpanypmwad.onion" target="_blank"
+                        class="badge online">
+                        wsptlnuoo3johqzcdlwuj5zcwfh2dwmswz6hahqctuxttvxpanypmwad.onion (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/cocorico.webp');" loading="lazy">
+                <h2>Cocorico</h2>
+                <div>
+
+                    <a href="http://xv3dbyx4iv35g7z2uoz2yznroy56oe32t7eppw2l2xvuel7km2xemrad.onion" target="_blank"
+                        class="badge online">
+                        xv3dbyx4iv35g7z2uoz2yznroy56oe32t7eppw2l2xvuel7km2xemrad.onion (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/colombia.webp');" loading="lazy">
+                <h2>Colombia Connection</h2>
+                <div>
+
+                    <a href="http://eg5pj3r4xhybxgfkjnkhbhwgkuonp5wtla3mbpuzphzk6lxkhftnvuyd.onion" target="_blank"
+                        class="badge online">
+                        eg5pj3r4xhybxgfkjnkhbhwgkuonp5wtla3mbpuzphzk6lxkhftnvuyd.onion (ONLINE)
+                    </a>
+
+                    <a href="http://k66zw4ygbdjzj3zm67ghqlnn6wlxiqmj7i2rfwv4hj2j6q3o4zf66kid.onion" target="_blank"
+                        class="badge online">
+                        k66zw4ygbdjzj3zm67ghqlnn6wlxiqmj7i2rfwv4hj2j6q3o4zf66kid.onion (ONLINE)
+                    </a>
+
+                    <a href="http://sphccguqtygygvm2z3gtijonbsnakhnv2eoi7gsxt2qu2cwpbjwd2mad.onion" target="_blank"
+                        class="badge offline">
+                        sphccguqtygygvm2z3gtijonbsnakhnv2eoi7gsxt2qu2cwpbjwd2mad.onion (OFFLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/darkmatter.webp');" loading="lazy">
+                <h2>Dark Matter</h2>
+                <div>
+
+                    <a href="http://darkmat3kdxestusl437urshpsravq7oqb7t3m36u2l62vnmmldzdmid.onion" target="_blank"
+                        class="badge online">
+                        darkmat3kdxestusl437urshpsravq7oqb7t3m36u2l62vnmmldzdmid.onion (ONLINE)
+                    </a>
+
+                    <a href="http://darkmmk3owyft4zzg3j3t25ri4z5bw7klapq6q3l762kxra72sli4mid.onion" target="_blank"
+                        class="badge online">
+                        darkmmk3owyft4zzg3j3t25ri4z5bw7klapq6q3l762kxra72sli4mid.onion (ONLINE)
+                    </a>
+
+                    <a href="http://darkmmro6j5xekpe7jje74maidkkkkw265nngjqxrv4ik7v3aiwdbtad.onion" target="_blank"
+                        class="badge online">
+                        darkmmro6j5xekpe7jje74maidkkkkw265nngjqxrv4ik7v3aiwdbtad.onion (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/dreadmarketv2.webp');" loading="lazy">
+                <h2>Dream Market V2</h2>
+                <div>
+
+                    <a href="http://dreamv2jji6uyejnk367mbrazxvlunhy74hixknqxybxznhx7kjewzid.onion" target="_blank"
+                        class="badge online">
+                        dreamv2jji6uyejnk367mbrazxvlunhy74hixknqxybxznhx7kjewzid.onion (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/drughub.webp');" loading="lazy">
+                <h2>DrugHub</h2>
+                <div>
+
+                    <a href="http://drughub666py6fgnml5kmxa7fva5noppkf6wkai4fwwvzwt4rz645aqd.onion" target="_blank"
+                        class="badge offline">
+                        drughub666py6fgnml5kmxa7fva5noppkf6wkai4fwwvzwt4rz645aqd.onion (OFFLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/elysium.webp');" loading="lazy">
+                <h2>Elysium Market</h2>
+                <div>
+
+                    <a href="http://elysiumyeudtha62s4oaowwm7ifmnunz3khs4sllhvinphfm4nirfcqd.onion" target="_blank"
+                        class="badge offline">
+                        elysiumyeudtha62s4oaowwm7ifmnunz3khs4sllhvinphfm4nirfcqd.onion (OFFLINE)
+                    </a>
+
+                    <a href="http://elysiumutkwscnmdohj23gkcyp3ebrf4iio3sngc5tvcgyfp4nqqmwad.onion" target="_blank"
+                        class="badge online">
+                        elysiumutkwscnmdohj23gkcyp3ebrf4iio3sngc5tvcgyfp4nqqmwad.onion (ONLINE)
+                    </a>
+
+                    <a href="http://elysiumpir7gp5j7pl3kye36xnj5zig4fe5ng67ji7s5kahj3jiitfqd.onion" target="_blank"
+                        class="badge online">
+                        elysiumpir7gp5j7pl3kye36xnj5zig4fe5ng67ji7s5kahj3jiitfqd.onion (ONLINE)
+                    </a>
+
+                    <a href="http://elysiumol473mecbwwjadi5ydlzd4x5fvwsanepazljq3frh57li3pqd.onion" target="_blank"
+                        class="badge online">
+                        elysiumol473mecbwwjadi5ydlzd4x5fvwsanepazljq3frh57li3pqd.onion (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/euphoria.webp');" loading="lazy">
+                <h2>Euphoria</h2>
+                <div>
+
+                    <a href="http://euphor2ivtwosiz6zspq7rdzzmyyo5nvr76qtgc473e2hnhffsred6qd.onion" target="_blank"
+                        class="badge online">
+                        euphor2ivtwosiz6zspq7rdzzmyyo5nvr76qtgc473e2hnhffsred6qd.onion (ONLINE)
+                    </a>
+
+                    <a href="http://euphorialth2wxqjd2y3mmenyquhs7yj26hvtpbf7zhyfmed7752srid.onion" target="_blank"
+                        class="badge online">
+                        euphorialth2wxqjd2y3mmenyquhs7yj26hvtpbf7zhyfmed7752srid.onion (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/kerberos.webp');" loading="lazy">
+                <h2>Kerberos</h2>
+                <div>
+
+                    <a href="http://kerberosemtkeqh7pznmv3negqhudxk5po3awdazx5fqgizttr6xeiid.onion" target="_blank"
+                        class="badge online">
+                        kerberosemtkeqh7pznmv3negqhudxk5po3awdazx5fqgizttr6xeiid.onion (ONLINE)
+                    </a>
+
+                    <a href="http://kerberosfwjuirbckcfspamq3wv3nfk6blusvabbtnsatiezm2uyfzid.onion" target="_blank"
+                        class="badge online">
+                        kerberosfwjuirbckcfspamq3wv3nfk6blusvabbtnsatiezm2uyfzid.onion (ONLINE)
+                    </a>
+
+                    <a href="http://kerberosgzhuw5oagmbzjecz5m3c2bmpg3mns6ty7ofwwk67kviswkad.onion" target="_blank"
+                        class="badge online">
+                        kerberosgzhuw5oagmbzjecz5m3c2bmpg3mns6ty7ofwwk67kviswkad.onion (ONLINE)
+                    </a>
+
+                    <a href="http://kerberoshz5i6au475yf63msi2llgxxf4obr4hvjq7hdmphec4t2j7ad.onion" target="_blank"
+                        class="badge online">
+                        kerberoshz5i6au475yf63msi2llgxxf4obr4hvjq7hdmphec4t2j7ad.onion (ONLINE)
+                    </a>
+
+                    <a href="http://kerberosazmnfrjinmftp3im3cr7hw4nxbavm4ngofn64g24be7h3kqd.onion" target="_blank"
+                        class="badge online">
+                        kerberosazmnfrjinmftp3im3cr7hw4nxbavm4ngofn64g24be7h3kqd.onion (ONLINE)
+                    </a>
+
+                    <a href="http://kerberosbkts3ulupqzjoxxo6xkwp4tllf36v5a3kbeemkwfw263y3ad.onion" target="_blank"
+                        class="badge online">
+                        kerberosbkts3ulupqzjoxxo6xkwp4tllf36v5a3kbeemkwfw263y3ad.onion (ONLINE)
+                    </a>
+
+                    <a href="http://kerberoscwus5qit6l32wmg3hz6j3zverf33moas3wjcgaatchililqd.onion" target="_blank"
+                        class="badge online">
+                        kerberoscwus5qit6l32wmg3hz6j3zverf33moas3wjcgaatchililqd.onion (ONLINE)
+                    </a>
+
+                    <a href="http://kerberosdkgfsepwkotclwpuc4iviucasicwgssv6zgcw3d5xa3tdwad.onion" target="_blank"
+                        class="badge online">
+                        kerberosdkgfsepwkotclwpuc4iviucasicwgssv6zgcw3d5xa3tdwad.onion (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/lion.webp');" loading="lazy">
+                <h2>Lion</h2>
+                <div>
+
+                    <a href="http://lionznqc2hg2wsp5vgruqait4cpknihwlje6hkjyi52lcl5ivyf7bcad.onion" target="_blank"
+                        class="badge offline">
+                        lionznqc2hg2wsp5vgruqait4cpknihwlje6hkjyi52lcl5ivyf7bcad.onion (OFFLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/mgmgrand.webp');" loading="lazy">
+                <h2>MGM Grand</h2>
+                <div>
+
+                    <a href="http://ngemgrlhmdqi3zsgscjgjrbwpietxf3kbwjfzrarb4h6f3nimjsiu7yd.onion" target="_blank"
+                        class="badge online">
+                        ngemgrlhmdqi3zsgscjgjrbwpietxf3kbwjfzrarb4h6f3nimjsiu7yd.onion (ONLINE)
+                    </a>
+
+                    <a href="http://ljr4rlkarfsrdxwilfitqhwqllihn6ooy6qfcuiuvtgrujexgxgwb2ad.onion" target="_blank"
+                        class="badge offline">
+                        ljr4rlkarfsrdxwilfitqhwqllihn6ooy6qfcuiuvtgrujexgxgwb2ad.onion (OFFLINE)
+                    </a>
+
+                    <a href="http://wghtttq3gkw2leaio5umqa2lqbjm4qcdhr4v5jj3ftirohx3hfp62eyd.onion" target="_blank"
+                        class="badge offline">
+                        wghtttq3gkw2leaio5umqa2lqbjm4qcdhr4v5jj3ftirohx3hfp62eyd.onion (OFFLINE)
+                    </a>
+
+                    <a href="http://ivam3anqpa6gopk6552c7nycvjlydzoay5eog2tythvuzm7c75xxeaad.onion" target="_blank"
+                        class="badge online">
+                        ivam3anqpa6gopk6552c7nycvjlydzoay5eog2tythvuzm7c75xxeaad.onion (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/nextgeneration.webp');" loading="lazy">
+                <h2>NextGeneration</h2>
+                <div>
+
+                    <a href="http://nextgenuxioipgxqs5ibsg6aofnwjflentjn4pmqp25h3guc6dwnanyd.onion" target="_blank"
+                        class="badge offline">
+                        nextgenuxioipgxqs5ibsg6aofnwjflentjn4pmqp25h3guc6dwnanyd.onion (OFFLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/nexus.webp');" loading="lazy">
+                <h2>Nexus</h2>
+                <div>
+
+                    <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion" target="_blank"
+                        class="badge online">
+                        nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion (ONLINE)
+                    </a>
+
+                    <a href="http://nexusb2l7hog66bnzz5msrz4m5qxj7jbi7aah3r65uzydy5mew2fu3id.onion" target="_blank"
+                        class="badge online">
+                        nexusb2l7hog66bnzz5msrz4m5qxj7jbi7aah3r65uzydy5mew2fu3id.onion (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/pegasus.webp');" loading="lazy">
+                <h2>Pegasus</h2>
+                <div>
+
+                    <a href="http://pegasusnpdrch2isegmo5pepybhnfzzfgmsyva2l2smrzkghyxnc3iqd.onion" target="_blank"
+                        class="badge offline">
+                        pegasusnpdrch2isegmo5pepybhnfzzfgmsyva2l2smrzkghyxnc3iqd.onion (OFFLINE)
+                    </a>
+
+                    <a href="http://pegasusificbht3c34owavlshrgt363n5qjknr5rzvdlwf2ssvmscxid.onion" target="_blank"
+                        class="badge offline">
+                        pegasusificbht3c34owavlshrgt363n5qjknr5rzvdlwf2ssvmscxid.onion (OFFLINE)
+                    </a>
+
+                    <a href="http://pegasusp3l6et62fk563cz4x2sxcz6kpixmtiz56j4wzj54u3tz56lyd.onion" target="_blank"
+                        class="badge offline">
+                        pegasusp3l6et62fk563cz4x2sxcz6kpixmtiz56j4wzj54u3tz56lyd.onion (OFFLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/quantum.webp');" loading="lazy">
+                <h2>Quantum</h2>
+                <div>
+
+                    <a href="http://quant6e55gvtl2baqh3rnocxmcujritxjt4yi67q4svkus6ja4dbu6qd.onion" target="_blank"
+                        class="badge offline">
+                        quant6e55gvtl2baqh3rnocxmcujritxjt4yi67q4svkus6ja4dbu6qd.onion (OFFLINE)
+                    </a>
+
+                    <a href="http://quant52e4qxftvllv25pibrcwc2finxsx6ofzhs56ywzc7rtcrfe64id.onion" target="_blank"
+                        class="badge offline">
+                        quant52e4qxftvllv25pibrcwc2finxsx6ofzhs56ywzc7rtcrfe64id.onion (OFFLINE)
+                    </a>
+
+                    <a href="http://quant3m7l2qhdjuul7ueg37sh72awr6yvpvev5fdqtbhbc24omdwwxqd.onion" target="_blank"
+                        class="badge offline">
+                        quant3m7l2qhdjuul7ueg37sh72awr6yvpvev5fdqtbhbc24omdwwxqd.onion (OFFLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/torzon.webp');" loading="lazy">
+                <h2>TorZon</h2>
+                <div>
+
+                    <a href="http://trzm.cc" target="_blank" class="badge offline">
+                        trzm.cc (OFFLINE)
+                    </a>
+
+                    <a href="http://torzon4kv5swfazrziqvel2imhxcckc4otcvopiv5lnxzpqu4v4m5iyd.onion" target="_blank"
+                        class="badge online">
+                        torzon4kv5swfazrziqvel2imhxcckc4otcvopiv5lnxzpqu4v4m5iyd.onion (ONLINE)
+                    </a>
+
+                    <a href="http://q46wfsee26kj6oead5hg643oi363lgqiz3m45b2dwrizefryu2zdfrqd.onion" target="_blank"
+                        class="badge online">
+                        q46wfsee26kj6oead5hg643oi363lgqiz3m45b2dwrizefryu2zdfrqd.onion (ONLINE)
+                    </a>
+
+                    <a href="http://sglgj2fytneccvyn6n4u3pacj4zhdhscfoptnhxxes3uvljmontru2yd.onion" target="_blank"
+                        class="badge online">
+                        sglgj2fytneccvyn6n4u3pacj4zhdhscfoptnhxxes3uvljmontru2yd.onion (ONLINE)
+                    </a>
+
+                    <a href="http://245mkrsljsgp3fdxp2hjw3pifplluznozd2lcqiojkc3n7zxdbc455id.onion" target="_blank"
+                        class="badge online">
+                        245mkrsljsgp3fdxp2hjw3pifplluznozd2lcqiojkc3n7zxdbc455id.onion (ONLINE)
+                    </a>
+
+                    <a href="http://wk6dwjxq5yfjnt2i7zz7vcrppb6hzrmxlq6sxxwhisco2e44wpkcvdad.onion" target="_blank"
+                        class="badge online">
+                        wk6dwjxq5yfjnt2i7zz7vcrppb6hzrmxlq6sxxwhisco2e44wpkcvdad.onion (ONLINE)
+                    </a>
+
+                    <a href="http://tjtmpqpfng6upzv34cpw5cglycwzdpnae3xau56wprp2wp5sw32benyd.onion" target="_blank"
+                        class="badge online">
+                        tjtmpqpfng6upzv34cpw5cglycwzdpnae3xau56wprp2wp5sw32benyd.onion (ONLINE)
+                    </a>
+
+                    <a href="http://ujgkk42xmmip6h567srdlleefgb7hemc424cwzylrvxzgvsyoou6atid.onion" target="_blank"
+                        class="badge offline">
+                        ujgkk42xmmip6h567srdlleefgb7hemc424cwzylrvxzgvsyoou6atid.onion (OFFLINE)
+                    </a>
+
+                    <a href="http://3c7caoyxqz3hd4pepb5owa6ac7qyrcceeu2wg73n3jrcpar664nyd3qd.onion" target="_blank"
+                        class="badge offline">
+                        3c7caoyxqz3hd4pepb5owa6ac7qyrcceeu2wg73n3jrcpar664nyd3qd.onion (OFFLINE)
+                    </a>
+
+                    <a href="http://5fcewlhdjn2gs4op4on6k2nea6nqmtn65wdohyodfahcvcumciv3soad.onion" target="_blank"
+                        class="badge online">
+                        5fcewlhdjn2gs4op4on6k2nea6nqmtn65wdohyodfahcvcumciv3soad.onion (ONLINE)
+                    </a>
+
+                    <a href="http://7hlducio2a57if4vk5yt7g63cbs42dffztcmkyjjrb7bmdy5iuuyi7qd.onion" target="_blank"
+                        class="badge online">
+                        7hlducio2a57if4vk5yt7g63cbs42dffztcmkyjjrb7bmdy5iuuyi7qd.onion (ONLINE)
+                    </a>
+
+                    <a href="http://6v4gemuzsix2p5q3feuz4bwvrbi75ycw665diwcltymkfhwmnxhkz6id.onion" target="_blank"
+                        class="badge online">
+                        6v4gemuzsix2p5q3feuz4bwvrbi75ycw665diwcltymkfhwmnxhkz6id.onion (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/wethenorth.webp');" loading="lazy">
+                <h2>We The North</h2>
+                <div>
+
+                    <a href="http://hn2paw7zaahbikbejiv6h22zwtijlam65y2c77xj2ypbilm2xs4bnbid.onion" target="_blank"
+                        class="badge online">
+                        hn2paw7zaahbikbejiv6h22zwtijlam65y2c77xj2ypbilm2xs4bnbid.onion (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/vortex.webp');" loading="lazy">
+                <h2>Vortex</h2>
+                <div>
+
+                    <a href="http://bar47oupp7kn2idtplbngebrtlhurfp5p4irvwngdkj2ynkc46jqihad.onion" target="_blank"
+                        class="badge online">
+                        bar47oupp7kn2idtplbngebrtlhurfp5p4irvwngdkj2ynkc46jqihad.onion (ONLINE)
+                    </a>
+
+                    <a href="http://mq7ozbnrqdjc6cof3yakegs44kmo6vl3ajcyzdeya3zjtmi65jtmwqid.onion" target="_blank"
+                        class="badge online">
+                        mq7ozbnrqdjc6cof3yakegs44kmo6vl3ajcyzdeya3zjtmi65jtmwqid.onion (ONLINE)
+                    </a>
+
+                    <a href="http://uz5teca64yvzfax2o5eey3v6pkyo6kusajtgkalys7r74ij7pilqj4id.onion" target="_blank"
+                        class="badge offline">
+                        uz5teca64yvzfax2o5eey3v6pkyo6kusajtgkalys7r74ij7pilqj4id.onion (OFFLINE)
+                    </a>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="search" class="category-section">
+            <h2>Search</h2>
+
+            <div class="market" style="--background-image: url('images/bravesearch.webp');" loading="lazy">
+                <h2>Brave Search</h2>
+                <div>
+
+                    <a href="http://search.brave4u7jddbv7cyviptqjc7jusxh72uik7zt6adtckl5f4nwy2v72qd.onion/"
+                        target="_blank" class="badge online">
+                        search.brave4u7jddbv7cyviptqjc7jusxh72uik7zt6adtckl5f4nwy2v72qd.onion/ (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/dig.webp');" loading="lazy">
+                <h2>Dig</h2>
+                <div>
+
+                    <a href="http://digdig2nugjpszzmqe5ep2bk7lqfpdlyrkojsx2j6kzalnrqtwedr3id.onion/" target="_blank"
+                        class="badge offline">
+                        digdig2nugjpszzmqe5ep2bk7lqfpdlyrkojsx2j6kzalnrqtwedr3id.onion/ (OFFLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/darknettrust.webp');" loading="lazy">
+                <h2>DarkNet Trust</h2>
+                <div>
+
+                    <a href="http://dntrustmuq5ccf3lygrnhsprpdliakq7r2ljsspczmdsslj5wl4teeid.onion/" target="_blank"
+                        class="badge offline">
+                        dntrustmuq5ccf3lygrnhsprpdliakq7r2ljsspczmdsslj5wl4teeid.onion/ (OFFLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/shoot.webp');" loading="lazy">
+                <h2>Shoot</h2>
+                <div>
+
+                    <a href="http://shootnnngg4akh7fkjmx5b5omsppt2zaefohzwnwryhy2c6mm3kbx6qd.onion/" target="_blank"
+                        class="badge online">
+                        shootnnngg4akh7fkjmx5b5omsppt2zaefohzwnwryhy2c6mm3kbx6qd.onion/ (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/vormweb.webp');" loading="lazy">
+                <h2>VormWeb</h2>
+                <div>
+
+                    <a href="http://volkancfgpi4c7ghph6id2t7vcntenuly66qjt6oedwtjmyj4tkk5oqd.onion/" target="_blank"
+                        class="badge online">
+                        volkancfgpi4c7ghph6id2t7vcntenuly66qjt6oedwtjmyj4tkk5oqd.onion/ (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/duckduckgo.webp');" loading="lazy">
+                <h2>DuckDuckGo</h2>
+                <div>
+
+                    <a href="http://https://duckduckgogg42xjoc72x3sjasowoarfbgcmvfimaftt6twagswzczad.onion/html/"
+                        target="_blank" class="badge offline">
+                        https://duckduckgogg42xjoc72x3sjasowoarfbgcmvfimaftt6twagswzczad.onion/html/ (OFFLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/startpage.webp');" loading="lazy">
+                <h2>StartPage</h2>
+                <div>
+
+                    <a href="http://http://startpagel6srwcjlue4zgq3zevrujfaow726kjytqbbjyrswwmjzcqd.onion/"
+                        target="_blank" class="badge offline">
+                        http://startpagel6srwcjlue4zgq3zevrujfaow726kjytqbbjyrswwmjzcqd.onion/ (OFFLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/grams.webp');" loading="lazy">
+                <h2>Grams</h2>
+                <div>
+
+                    <a href="http://grams64rarzrk7rzdaz2fpb7lehcyi7zrrf5kd6w2uoamp7jw2aq6vyd.onion" target="_blank"
+                        class="badge online">
+                        grams64rarzrk7rzdaz2fpb7lehcyi7zrrf5kd6w2uoamp7jw2aq6vyd.onion (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/haystack.webp');" loading="lazy">
+                <h2>Haystack</h2>
+                <div>
+
+                    <a href="http://haystak5njsmn2hqkewecpaxetahtwhsbsa64jom2k22z5afxhnpxfid.onion" target="_blank"
+                        class="badge online">
+                        haystak5njsmn2hqkewecpaxetahtwhsbsa64jom2k22z5afxhnpxfid.onion (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/metager.webp');" loading="lazy">
+                <h2>MetaGer</h2>
+                <div>
+
+                    <a href="http://haystak5njsmn2hqkewecpaxetahtwhsbsa64jom2k22z5afxhnpxfid.onion" target="_blank"
+                        class="badge online">
+                        haystak5njsmn2hqkewecpaxetahtwhsbsa64jom2k22z5afxhnpxfid.onion (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/torch.webp');" loading="lazy">
+                <h2>Torch</h2>
+                <div>
+
+                    <a href="http://torchdeedp3i2jigzjdmfpn5ttjhthh5wbmda2rr3jvqjg5p77c54dqd.onion" target="_blank"
+                        class="badge online">
+                        torchdeedp3i2jigzjdmfpn5ttjhthh5wbmda2rr3jvqjg5p77c54dqd.onion (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/excavator.webp');" loading="lazy">
+                <h2>ExcavaTOR</h2>
+                <div>
+
+                    <a href="http://2fd6cemt4gmccflhm6imvdfvli3nf7zn6rfrwpsy7uhxrgbypvwf5fad.onion" target="_blank"
+                        class="badge online">
+                        2fd6cemt4gmccflhm6imvdfvli3nf7zn6rfrwpsy7uhxrgbypvwf5fad.onion (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/deepsearches.webp');" loading="lazy">
+                <h2>The Deep Searches</h2>
+                <div>
+
+                    <a href="http://searchgf7gdtauh7bhnbyed4ivxqmuoat3nm6zfrg3ymkq6mtnpye3ad.onion" target="_blank"
+                        class="badge online">
+                        searchgf7gdtauh7bhnbyed4ivxqmuoat3nm6zfrg3ymkq6mtnpye3ad.onion (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/tor66.webp');" loading="lazy">
+                <h2>Tor66</h2>
+                <div>
+
+                    <a href="http://tor66sewebgixwhcqfnp5inzp5x5uohhdy3kvtnyfxc2e5mxiuh34iid.onion" target="_blank"
+                        class="badge online">
+                        tor66sewebgixwhcqfnp5inzp5x5uohhdy3kvtnyfxc2e5mxiuh34iid.onion (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/torgle.webp');" loading="lazy">
+                <h2>Torgle</h2>
+                <div>
+
+                    <a href="http://iy3544gmoeclh5de6gez2256v6pjh4omhpqdh2wpeeppjtvqmjhkfwad.onion/torgle"
+                        target="_blank" class="badge online">
+                        iy3544gmoeclh5de6gez2256v6pjh4omhpqdh2wpeeppjtvqmjhkfwad.onion/torgle (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/i2psearch.webp');" loading="lazy">
+                <h2>I2P Search</h2>
+                <div>
+
+                    <a href="http://i2poulge3qyo33q4uazlda367okpkczn4rno2vjfetawoghciae6ygad.onion" target="_blank"
+                        class="badge online">
+                        i2poulge3qyo33q4uazlda367okpkczn4rno2vjfetawoghciae6ygad.onion (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/ahmia.webp');" loading="lazy">
+                <h2>Ahmia</h2>
+                <div>
+
+                    <a href="http://juhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion" target="_blank"
+                        class="badge online">
+                        juhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="forums" class="category-section">
+            <h2>Forums</h2>
+
+            <div class="market" style="--background-image: url('images/pitch.webp');" loading="lazy">
+                <h2>Pitch (HIGHLY RECOMMENDED)</h2>
+                <div>
+
+                    <a href="http://http://pitchzzzoot5i4cpsblu2d5poifsyixo5r4litxkukstre5lrbjakxid.onion/"
+                        target="_blank" class="badge offline">
+                        http://pitchzzzoot5i4cpsblu2d5poifsyixo5r4litxkukstre5lrbjakxid.onion/ (OFFLINE)
+                    </a>
+
+                    <a href="http://pitchprash4aqilfr7sbmuwve3pnkpylqwxjbj2q5o4szcfeea6d27yd.onion" target="_blank"
+                        class="badge online">
+                        pitchprash4aqilfr7sbmuwve3pnkpylqwxjbj2q5o4szcfeea6d27yd.onion (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/cryptbb.webp');" loading="lazy">
+                <h2>CryptBB</h2>
+                <div>
+
+                    <a href="http://cryptbbtg65gibadeeo2awe3j7s6evg7eklserehqr4w4e2bis5tebid.onion" target="_blank"
+                        class="badge online">
+                        cryptbbtg65gibadeeo2awe3j7s6evg7eklserehqr4w4e2bis5tebid.onion (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/dread.webp');" loading="lazy">
+                <h2>Dread</h2>
+                <div>
+
+                    <a href="http://dreadytofatroptsdj6io7l3xptbet6onoyno2yv7jicoxknyazubrad.onion" target="_blank"
+                        class="badge online">
+                        dreadytofatroptsdj6io7l3xptbet6onoyno2yv7jicoxknyazubrad.onion (ONLINE)
+                    </a>
+
+                    <a href="http://g66ol3eb5ujdckzqqfmjsbpdjufmjd5nsgdipvxmsh7rckzlhywlzlqd.onion" target="_blank"
+                        class="badge offline">
+                        g66ol3eb5ujdckzqqfmjsbpdjufmjd5nsgdipvxmsh7rckzlhywlzlqd.onion (OFFLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/ramble.webp');" loading="lazy">
+                <h2>Ramble</h2>
+                <div>
+
+                    <a href="http://rambleeeqrhty6s5jgefdfdtc6tfgg4jj6svr4jpgk4wjtg3qshwbaad.onion/" target="_blank"
+                        class="badge online">
+                        rambleeeqrhty6s5jgefdfdtc6tfgg4jj6svr4jpgk4wjtg3qshwbaad.onion/ (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/query.webp');" loading="lazy">
+                <h2>Query</h2>
+                <div>
+
+                    <a href="http://ruc4i7xn5qu5uc7fu2sc34r6xl55xhgvxbcs56t4ayvbqo2fmp4pehqd.onion/" target="_blank"
+                        class="badge online">
+                        ruc4i7xn5qu5uc7fu2sc34r6xl55xhgvxbcs56t4ayvbqo2fmp4pehqd.onion/ (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/germania.webp');" loading="lazy">
+                <h2>Germania</h2>
+                <div>
+
+                    <a href="http://germania7zs27fu3gi76wlr5rd64cc2yjexyzvrbm4jufk7pibrpizad.onion" target="_blank"
+                        class="badge online">
+                        germania7zs27fu3gi76wlr5rd64cc2yjexyzvrbm4jufk7pibrpizad.onion (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/cebulka.webp');" loading="lazy">
+                <h2>Cebulka</h2>
+                <div>
+
+                    <a href="http://cebulka7uxchnbpvmqapg5pfos4ngaxglsktzvha7a5rigndghvadeyd.onion" target="_blank"
+                        class="badge online">
+                        cebulka7uxchnbpvmqapg5pfos4ngaxglsktzvha7a5rigndghvadeyd.onion (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/suprbay.webp');" loading="lazy">
+                <h2>SuprBay</h2>
+                <div>
+
+                    <a href="http://suprbaydvdcaynfo4dgdzgxb4zuso7rftlil5yg5kqjefnw4wq4ulcad.onion" target="_blank"
+                        class="badge online">
+                        suprbaydvdcaynfo4dgdzgxb4zuso7rftlil5yg5kqjefnw4wq4ulcad.onion (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/endchan.webp');" loading="lazy">
+                <h2>Endchan</h2>
+                <div>
+
+                    <a href="http://enxx3byspwsdo446jujc52ucy2pf5urdbhqw3kbsfhlfjwmbpj5smdad.onion/" target="_blank"
+                        class="badge online">
+                        enxx3byspwsdo446jujc52ucy2pf5urdbhqw3kbsfhlfjwmbpj5smdad.onion/ (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/out3rspace.webp');" loading="lazy">
+                <h2>Out3rSpace</h2>
+                <div>
+
+                    <a href="http://reycdxyc24gf7jrnwutzdn3smmweizedy7uojsa7ols6sflwu25ijoyd.onion/" target="_blank"
+                        class="badge online">
+                        reycdxyc24gf7jrnwutzdn3smmweizedy7uojsa7ols6sflwu25ijoyd.onion/ (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/s-config.webp');" loading="lazy">
+                <h2>s-config</h2>
+                <div>
+
+                    <a href="http://xjfbpuj56rdazx4iolylxplbvyft2onuerjeimlcqwaihp3s6r4xebqd.onion/" target="_blank"
+                        class="badge online">
+                        xjfbpuj56rdazx4iolylxplbvyft2onuerjeimlcqwaihp3s6r4xebqd.onion/ (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="news" class="category-section">
+            <h2>News</h2>
+
+            <div class="market" style="--background-image: url('images/captainblackbeard.webp');" loading="lazy">
+                <h2>Darknet Radio: CaptainBlackbeard (HIGHLY RECOMMENDED)</h2>
+                <div>
+
+                    <a href="http://redcircle.com/shows/CaptainBlackbeard" target="_blank" class="badge online">
+                        redcircle.com/shows/CaptainBlackbeard (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/insurgeonsblog.webp');" loading="lazy">
+                <h2>Insurgeon's Blog</h2>
+                <div>
+
+                    <a href="http://z7735okcy6gggduobp6vjfcgwz4ss5eeduww7iw2agjmfgpjlnquezqd.onion/" target="_blank"
+                        class="badge offline">
+                        z7735okcy6gggduobp6vjfcgwz4ss5eeduww7iw2agjmfgpjlnquezqd.onion/ (OFFLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/thetortimes.webp');" loading="lazy">
+                <h2>The Tor Times</h2>
+                <div>
+
+                    <a href="http://tortimeswqlzti2aqbjoieisne4ubyuoeiiugel2layyudcfrwln76qd.onion/" target="_blank"
+                        class="badge online">
+                        tortimeswqlzti2aqbjoieisne4ubyuoeiiugel2layyudcfrwln76qd.onion/ (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/dutchnationalpolice.webp');" loading="lazy">
+                <h2>Dutch National Police</h2>
+                <div>
+
+                    <a href="http://tcecdnp2fhyxlcrjoyc2eimdjosr65hweut6y7r2u6b5y75yuvbkvfyd.onion/" target="_blank"
+                        class="badge online">
+                        tcecdnp2fhyxlcrjoyc2eimdjosr65hweut6y7r2u6b5y75yuvbkvfyd.onion/ (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/propublica.webp');" loading="lazy">
+                <h2>ProPublica</h2>
+                <div>
+
+                    <a href="http://p53lf57qovyuvwsc6xnrppyply3vtqm7l6pcobkmyqsiofyeznfu5uqd.onion/" target="_blank"
+                        class="badge online">
+                        p53lf57qovyuvwsc6xnrppyply3vtqm7l6pcobkmyqsiofyeznfu5uqd.onion/ (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/nytimes.webp');" loading="lazy">
+                <h2>NY Times</h2>
+                <div>
+
+                    <a href="http://www.nytimesn7cgmftshazwhfgzm37qxb44r64ytbb2dj3x62d2lljsciiyd.onion/" target="_blank"
+                        class="badge offline">
+                        www.nytimesn7cgmftshazwhfgzm37qxb44r64ytbb2dj3x62d2lljsciiyd.onion/ (OFFLINE)
+                    </a>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="security" class="category-section">
+            <h2>Security</h2>
+
+            <div class="market" style="--background-image: url('images/nihilism.webp');" loading="lazy">
+                <h2>The Nihilism OpSec Blog (HIGHLY RECOMMENDED)</h2>
+                <div>
+
+                    <a href="http://blog.nowherejezfoltodf4jiyl6r56jnzintap5vyjlia7fkirfsnfizflqd.onion/index.html"
+                        target="_blank" class="badge online">
+                        blog.nowherejezfoltodf4jiyl6r56jnzintap5vyjlia7fkirfsnfizflqd.onion/index.html (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/theopsecmanual.webp');" loading="lazy">
+                <h2>The OpSec Manual (by Mikoyan Gurevich) (HIGHLY RECOMMENDED)</h2>
+                <div>
+
+                    <a href="http://jqibjqqagao3peozxfs53tr6aecoyvctumfsc2xqniu4xgcrksal2iqd.onion/" target="_blank"
+                        class="badge online">
+                        jqibjqqagao3peozxfs53tr6aecoyvctumfsc2xqniu4xgcrksal2iqd.onion/ (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/notraceproject.webp');" loading="lazy">
+                <h2>No Trace Project</h2>
+                <div>
+
+                    <a href="http://i4pd4zpyhrojnyx5l3d2siauy4almteocqow4bp2lqxyocrfy6prycad.onion/" target="_blank"
+                        class="badge online">
+                        i4pd4zpyhrojnyx5l3d2siauy4almteocqow4bp2lqxyocrfy6prycad.onion/ (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/anonymitypapers.webp');" loading="lazy">
+                <h2>Anonymity Papers</h2>
+                <div>
+
+                    <a href="http://7fa6xlti5joarlmkuhjaifa47ukgcwz6tfndgax45ocyn4rixm632jid.onion/anonbib/index.html"
+                        target="_blank" class="badge online">
+                        7fa6xlti5joarlmkuhjaifa47ukgcwz6tfndgax45ocyn4rixm632jid.onion/anonbib/index.html (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/thetorproject.webp');" loading="lazy">
+                <h2>The Tor Project</h2>
+                <div>
+
+                    <a href="http://pzhdfe7jraknpj2qgu5cz2u3i4deuyfwmonvzu5i3nyw4t4bmg7o5pad.onion/index.html"
+                        target="_blank" class="badge online">
+                        pzhdfe7jraknpj2qgu5cz2u3i4deuyfwmonvzu5i3nyw4t4bmg7o5pad.onion/index.html (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="communications" class="category-section">
+            <h2>Communications</h2>
+
+            <div class="market" style="--background-image: url('images/sonar.webp');" loading="lazy">
+                <h2>Sonar</h2>
+                <div>
+
+                    <a href="http://sonarmsng5vzwqezlvtu2iiwwdn3dxkhotftikhowpfjuzg7p3ca5eid.onion/" target="_blank"
+                        class="badge offline">
+                        sonarmsng5vzwqezlvtu2iiwwdn3dxkhotftikhowpfjuzg7p3ca5eid.onion/ (OFFLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/protonmail.webp');" loading="lazy">
+                <h2>Protonmail</h2>
+                <div>
+
+                    <a href="http://protonmailrmez3lotccipshtkleegetolb73fuirgj7r4o4vfu7ozyd.onion/" target="_blank"
+                        class="badge online">
+                        protonmailrmez3lotccipshtkleegetolb73fuirgj7r4o4vfu7ozyd.onion/ (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/riseup.webp');" loading="lazy">
+                <h2>RiseUp</h2>
+                <div>
+
+                    <a href="http://vww6ybal4bd7szmgncyruucpgfkqahzddi37ktceo3ah7ngmcopnpyyd.onion/about-us/index.en.html"
+                        target="_blank" class="badge online">
+                        vww6ybal4bd7szmgncyruucpgfkqahzddi37ktceo3ah7ngmcopnpyyd.onion/about-us/index.en.html (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/cockli.webp');" loading="lazy">
+                <h2>cock.li</h2>
+                <div>
+
+                    <a href="http://xdkriz6cn2avvcr2vks5lvvtmfojz2ohjzj4fhyuka55mvljeso2ztqd.onion/" target="_blank"
+                        class="badge online">
+                        xdkriz6cn2avvcr2vks5lvvtmfojz2ohjzj4fhyuka55mvljeso2ztqd.onion/ (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/csemail.webp');" loading="lazy">
+                <h2>cs.email</h2>
+                <div>
+
+                    <a href="http://csmail3thcskmzvjicww3qdkvrhb6pb5s7zjqtb3gdst6guby2stsiqd.onion/" target="_blank"
+                        class="badge online">
+                        csmail3thcskmzvjicww3qdkvrhb6pb5s7zjqtb3gdst6guby2stsiqd.onion/ (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/cwtch.webp');" loading="lazy">
+                <h2>Cwtch</h2>
+                <div>
+
+                    <a href="http://cwtchim3z2gdsyb27acfc26lup5aqbegjrjsqulzrnkuoalq5h4gmcid.onion/" target="_blank"
+                        class="badge online">
+                        cwtchim3z2gdsyb27acfc26lup5aqbegjrjsqulzrnkuoalq5h4gmcid.onion/ (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/darwin1210.webp');" loading="lazy">
+                <h2>Darwin1210</h2>
+                <div>
+
+                    <a href="http://mail.danielas3rtn54uwmofdo3x2bsdifr47huasnmbgqzfrec5ubupvtpid.onion/"
+                        target="_blank" class="badge online">
+                        mail.danielas3rtn54uwmofdo3x2bsdifr47huasnmbgqzfrec5ubupvtpid.onion/ (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/darknetmailexchange.webp');" loading="lazy">
+                <h2>Darknet Mail Exchange (DNMX)</h2>
+                <div>
+
+                    <a href="http://dnmxjaitaiafwmss2lx7tbs5bv66l7vjdmb5mtb3yqpxqhk3it5zivad.onion/" target="_blank"
+                        class="badge online">
+                        dnmxjaitaiafwmss2lx7tbs5bv66l7vjdmb5mtb3yqpxqhk3it5zivad.onion/ (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/morke.webp');" loading="lazy">
+                <h2>Morke</h2>
+                <div>
+
+                    <a href="http://6n5nbusxgyw46juqo3nt5v4zuivdbc7mzm74wlhg7arggetaui4yp4id.onion/" target="_blank"
+                        class="badge online">
+                        6n5nbusxgyw46juqo3nt5v4zuivdbc7mzm74wlhg7arggetaui4yp4id.onion/ (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/torbox.webp');" loading="lazy">
+                <h2>TorBox</h2>
+                <div>
+
+                    <a href="http://torbox36ijlcevujx7mjb4oiusvwgvmue7jfn2cvutwa6kl6to3uyqad.onion/" target="_blank"
+                        class="badge online">
+                        torbox36ijlcevujx7mjb4oiusvwgvmue7jfn2cvutwa6kl6to3uyqad.onion/ (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="crypto" class="category-section">
+            <h2>Crypto</h2>
+
+            <div class="market" style="--background-image: url('images/featherwallet.webp');" loading="lazy">
+                <h2>Feather Wallet</h2>
+                <div>
+
+                    <a href="http://featherdvtpi7ckdbkb2yxjfwx3oyvr3xjz3oo4rszylfzjdg6pbm3id.onion/" target="_blank"
+                        class="badge online">
+                        featherdvtpi7ckdbkb2yxjfwx3oyvr3xjz3oo4rszylfzjdg6pbm3id.onion/ (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/monero.webp');" loading="lazy">
+                <h2>Monero</h2>
+                <div>
+
+                    <a href="http://monerotoruzizulg5ttgat2emf4d6fbmiea25detrmmy7erypseyteyd.onion/" target="_blank"
+                        class="badge online">
+                        monerotoruzizulg5ttgat2emf4d6fbmiea25detrmmy7erypseyteyd.onion/ (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/blockchainexplorer.webp');" loading="lazy">
+                <h2>Blockchain Explorer</h2>
+                <div>
+
+                    <a href="http://blkchairbknpn73cfjhevhla7rkp4ed5gg2knctvv7it4lioy22defid.onion/" target="_blank"
+                        class="badge online">
+                        blkchairbknpn73cfjhevhla7rkp4ed5gg2knctvv7it4lioy22defid.onion/ (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/monerofail.webp');" loading="lazy">
+                <h2>Monero.fail</h2>
+                <div>
+
+                    <a href="http://livk2fpdv4xjnjrbxfz2tw3ptogqacn2dwfzxbxr3srinryxrcewemid.onion/#" target="_blank"
+                        class="badge offline">
+                        livk2fpdv4xjnjrbxfz2tw3ptogqacn2dwfzxbxr3srinryxrcewemid.onion/# (OFFLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/wasabiwallet.webp');" loading="lazy">
+                <h2>Wasabi Wallet</h2>
+                <div>
+
+                    <a href="http://wasabiukrxmkdgve5kynjztuovbg43uxcbcxn6y2okcrsg7gb6jdmbad.onion/" target="_blank"
+                        class="badge online">
+                        wasabiukrxmkdgve5kynjztuovbg43uxcbcxn6y2okcrsg7gb6jdmbad.onion/ (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="tools" class="category-section">
+            <h2>Tools</h2>
+
+            <div class="market" style="--background-image: url('images/onionshare.webp');" loading="lazy">
+                <h2>OnionShare</h2>
+                <div>
+
+                    <a href="http://lldan5gahapx5k7iafb3s4ikijc4ni7gx5iywdflkba5y2ezyg6sjgyd.onion" target="_blank"
+                        class="badge online">
+                        lldan5gahapx5k7iafb3s4ikijc4ni7gx5iywdflkba5y2ezyg6sjgyd.onion (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/qubesos.webp');" loading="lazy">
+                <h2>Qubes OS</h2>
+                <div>
+
+                    <a href="http://qubesosfasa4zl44o4tws22di6kepyzfeqv3tg4e3ztknltfxqrymdad.onion/" target="_blank"
+                        class="badge online">
+                        qubesosfasa4zl44o4tws22di6kepyzfeqv3tg4e3ztknltfxqrymdad.onion/ (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/whonix.webp');" loading="lazy">
+                <h2>Whonix</h2>
+                <div>
+
+                    <a href="http://www.dds6qkxpwdeubwucdiaord2xgbbeyds25rbsgr73tbfpqpt4a6vjwsyd.onion/" target="_blank"
+                        class="badge online">
+                        www.dds6qkxpwdeubwucdiaord2xgbbeyds25rbsgr73tbfpqpt4a6vjwsyd.onion/ (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/njalla.webp');" loading="lazy">
+                <h2>Njal.la</h2>
+                <div>
+
+                    <a href="http://njallalafimoej5i4eg7vlnqjvmb6zhdh27qxcatdn647jtwwwui3nad.onion/" target="_blank"
+                        class="badge online">
+                        njallalafimoej5i4eg7vlnqjvmb6zhdh27qxcatdn647jtwwwui3nad.onion/ (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/mullvad.webp');" loading="lazy">
+                <h2>Mullvad</h2>
+                <div>
+
+                    <a href="http://o54hon2e2vj6c7m3aqqu6uyece65by3vgoxxhlqlsvkmacw6a7m7kiad.onion/en" target="_blank"
+                        class="badge online">
+                        o54hon2e2vj6c7m3aqqu6uyece65by3vgoxxhlqlsvkmacw6a7m7kiad.onion/en (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/cryptostorm.webp');" loading="lazy">
+                <h2>Cryptostorm</h2>
+                <div>
+
+                    <a href="http://stormwayszuh4juycoy4kwoww5gvcu2c4tdtpkup667pdwe4qenzwayd.onion/" target="_blank"
+                        class="badge online">
+                        stormwayszuh4juycoy4kwoww5gvcu2c4tdtpkup667pdwe4qenzwayd.onion/ (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/keypass.webp');" loading="lazy">
+                <h2>Keypass</h2>
+                <div>
+
+                    <a href="http://keybase5wmilwokqirssclfnsqrjdsi7jdir5wy7y7iu3tanwmtp6oid.onion/" target="_blank"
+                        class="badge online">
+                        keybase5wmilwokqirssclfnsqrjdsi7jdir5wy7y7iu3tanwmtp6oid.onion/ (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/simplytranslate.webp');" loading="lazy">
+                <h2>SimplyTranslate</h2>
+                <div>
+
+                    <a href="http://xxtbwyb5z5bdvy2f6l2yquu5qilgkjeewno4qfknvb3lkg3nmoklitid.onion/" target="_blank"
+                        class="badge online">
+                        xxtbwyb5z5bdvy2f6l2yquu5qilgkjeewno4qfknvb3lkg3nmoklitid.onion/ (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/thepiratebay.webp');" loading="lazy">
+                <h2>The Pirate Bay</h2>
+                <div>
+
+                    <a href="http://piratebayo3klnzokct3wt5yyxb2vpebbuyjl7m623iaxmqhsd52coid.onion/" target="_blank"
+                        class="badge online">
+                        piratebayo3klnzokct3wt5yyxb2vpebbuyjl7m623iaxmqhsd52coid.onion/ (ONLINE)
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="market" style="--background-image: url('images/torpaste.webp');" loading="lazy">
+                <h2>TorPaste</h2>
+                <div>
+
+                    <a href="http://torpastezr7464pevuvdjisbvaf4yqi4n7sgz7lkwgqwxznwy5duj4ad.onion/" target="_blank"
+                        class="badge offline">
+                        torpastezr7464pevuvdjisbvaf4yqi4n7sgz7lkwgqwxznwy5duj4ad.onion/ (OFFLINE)
+                    </a>
+
+                </div>
+            </div>
+        </section>
+
+        <div style="text-align: center; margin-top: 40px; padding: 20px; border-top: 1px solid #333;">
+            <h2>Support DarkwebDaily's Independence</h2>
+            <div
+                style="display: inline-block; background: #1a1a1a; padding: 15px 25px; border-radius: 5px; border: 1px solid #444;">
+                <span
+                    style="background: #ff6600; color: #000; padding: 2px 8px; border-radius: 3px; font-weight: bold; margin-right: 10px;">XMR</span>
+                <code>463LdviDd14hTKjBpqYnaneF3TCLVc4JEQhc5qtyHJ9TUJPYw5nFy37W2M6FLkUd1eTuAbPnu1SV144orRYa43wu2XMTcao</code>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
